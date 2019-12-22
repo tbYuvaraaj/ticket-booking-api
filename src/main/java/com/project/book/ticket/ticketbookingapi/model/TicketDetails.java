@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.Size;
+import java.util.Date;
 
 @Document
 public class TicketDetails {
@@ -13,11 +14,21 @@ public class TicketDetails {
     @Size(min = 2,message = "Please provide minimum 2 characters")
     private String name;
     private int age;
+    private Date dateOfReservation;
+    private Date dateOfJourney;
 
-    public TicketDetails(String pnrNumber, String name, int age) {
+   /* public TicketDetails(String pnrNumber, String name, int age) {
         this.pnrNumber = pnrNumber;
         this.name = name;
         this.age = age;
+    }*/
+
+    public TicketDetails(String pnrNumber, String name, int age, Date dateOfReservation, Date dateOfJourney) {
+        this.pnrNumber = pnrNumber;
+        this.name = name;
+        this.age = age;
+        this.dateOfJourney = dateOfJourney;
+        this.dateOfReservation = dateOfReservation;
     }
 
     public String getPnrNumber() {
@@ -42,5 +53,17 @@ public class TicketDetails {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public Date getDateOfReservation() { return dateOfReservation; }
+
+    public void setDateOfReservation(Date dateOfReservation) { this.dateOfReservation = dateOfReservation; }
+
+    public Date getDateOfJourney() {
+        return dateOfJourney;
+    }
+
+    public void setDateOfJourney(Date dateOfJourney) {
+        this.dateOfJourney = dateOfJourney;
     }
 }

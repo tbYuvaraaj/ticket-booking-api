@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 import java.util.Optional;
 import java.util.function.Supplier;
 
@@ -18,6 +21,7 @@ public class TicketBookingService {
 
     public void bookTicket(TicketDetails ticketDetails){
         ticketDetails.setPnrNumber(generatePnrNumber());
+        ticketDetails.setDateOfReservation(new Date());
 
         if(ticketDetails.getAge() < 0){
             throw new InvalidInputException("Provided age is not valid.");

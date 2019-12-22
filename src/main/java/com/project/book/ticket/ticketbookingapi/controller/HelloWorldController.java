@@ -8,6 +8,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
+import static com.project.book.ticket.ticketbookingapi.constants.TicketBookingConstants.*;
+
 import java.util.Optional;
 
 @RestController
@@ -16,19 +20,13 @@ public class HelloWorldController {
     @Autowired
     private  TicketBookingService ticketBookingService;
 
-    @RequestMapping("/test")
-    public String sample(){
-        return "Good Morning..";
-    }
-
     @PostMapping("/reservation")
     public void ticketReservation(@RequestBody TicketDetails details){
         ticketBookingService.bookTicket(details);
-        System.out.println("Ticket has been booked!");
     }
 
     @GetMapping("/pnr/{no}")
     public ResponseEntity<TicketDetails> getTicketDetails(@PathVariable("no") String pnrNo){
-        return  new ResponseEntity<TicketDetails>(ticketBookingService.getTicketDetails(pnrNo).orElseThrow(()->new TicketNotFoundException("pnrNo")), HttpStatus.OK);
+        return  new ResponseEntity<TicketDetails>(ticketBookingService.getTicketDetails(pnrNo).orElseThrow(()->new TicketNotFoundException(TICKET_NOT_FOUND_MESSAGE+pnrNo)), HttpStatus.OK);
   }
 }
